@@ -7,6 +7,7 @@ jobs:
   runs-on: ubuntu-latest
   steps:
    - name: give the secret code
+     if: github.ref_name == 'main'
      env:
        message: ${{ secrets.GREETING_MESSAGE }}
      run: echo $message
