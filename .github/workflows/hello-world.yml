@@ -6,5 +6,7 @@ jobs:
  say-hello:
   runs-on: ubuntu-latest
   steps:
-   - name: print a greeting
-     run: echo "hello world" 
+   - name: checkout code
+     uses: actions/checkout
+   - name: list files
+     run: ls-la
