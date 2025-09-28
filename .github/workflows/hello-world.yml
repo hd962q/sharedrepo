@@ -1,12 +1,12 @@
-name: hello world
+name: secret flow
 
 on: [push]
 
 jobs:
- say-hello:
+ use_the_secret:
   runs-on: ubuntu-latest
   steps:
-   - name: checkout code
-     uses: actions/checkout@v4
-   - name: list files
-     run: ls -la
+   - name: give the secret code
+     env:
+       message: ${{ secrets.GREETING_MESSAGE }}
+     run: echo $message
