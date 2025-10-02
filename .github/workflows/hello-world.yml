@@ -14,7 +14,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
@@ -25,3 +25,4 @@ jobs:
 
       - name: 4. Use the dependency
         run: npx cowsay "I'm using a cached dependency!"
+
