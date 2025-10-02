@@ -1,0 +1,19 @@
+name: Use a Custom Action
+
+on: [push]
+
+jobs:
+  test-custom-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Check out the repository
+        uses: actions/checkout@v4
+
+      - name: 2. Run our custom composite action
+        id: hello-step
+        uses: ./hello-world-action
+        with:
+          who-to-greet: 'Mona the Octocat'
+
+      - name: 3. Use the output from the custom action
+        run: echo "The time returned by the action was ${{ steps.hello-step.outputs.time }}"
