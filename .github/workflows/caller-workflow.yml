@@ -3,6 +3,8 @@ name: Caller Workflow
 on:
   push:
     branches: [ main ]
+    paths:
+      - '.github/workflows/**'
 
 jobs:
   call-reusable-workflow:
