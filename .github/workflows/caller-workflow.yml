@@ -9,6 +9,6 @@ jobs:
     # 'uses', 'with', and 'secrets' are indented here
     uses: ./.github/workflows/reusable-build.yml@main
     with:
-      version: '1.2.3'
+      version: '1'
     secrets:
       DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
