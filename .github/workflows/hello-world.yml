@@ -1,13 +1,27 @@
-name: secret flow
+name: Caching Workflow
 
 on: [push]
 
 jobs:
- use_the_secret:
-  runs-on: ubuntu-latest
-  steps:
-   - name: give the secret code
-     if: github.ref_name == 'main'
-     env:
-       message: ${{ secrets.GREETING_MESSAGE }}
-     run: echo $message
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Check out repository code
+        uses: actions/checkout@v4
+
+      - name: 2. Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: 3. Install dependencies
+        # Only run this step if the cache was not restored
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm install
+
+      - name: 4. Use the dependency
+        run: npx cowsay "I'm using a cached dependency!"
