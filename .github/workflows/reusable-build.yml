@@ -1,0 +1,22 @@
+name: Reusable Build
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        description: 'The version to build'
+        required: true
+        type: string
+    secrets:
+      DEPLOY_TOKEN:
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Echo the build version from input
+        run: echo "Building version ${{ inputs.version }}..."
+
+      - name: 2. Echo the secret
+        run: echo "The passed-in deploy token starts with ${{ secrets.DEPLOY_TOKEN }}"
