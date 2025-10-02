@@ -1,6 +1,6 @@
 name: artifacts
 
-on: [push]
+on: commit_comment
 
 jobs:
   build:
@@ -25,6 +25,7 @@ jobs:
           name: build-job
       - name: read the file
         run: cat build.txt
+
 
 
 
