@@ -10,6 +10,7 @@ inputs:
 outputs:
   time:
     description: 'The time we said hello'
+    value: ${{ steps.time-step.outputs.time }}
 
 runs:
   using: "composite"
