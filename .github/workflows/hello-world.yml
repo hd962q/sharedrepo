@@ -1,13 +1,31 @@
-name: secret flow
+name: artifacts
 
-on: [push]
+on: commit_comment
 
 jobs:
- use_the_secret:
-  runs-on: ubuntu-latest
-  steps:
-   - name: give the secret code
-     if: github.ref_name == 'main'
-     env:
-       message: ${{ secrets.GREETING_MESSAGE }}
-     run: echo $message
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: create an artifact
+        run: echo "this is an artifact" > build.txt
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
+        with: 
+          name: build-job
+          path: build.txt
+      
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment: production
+    steps:
+      - name: download
+        uses: actions/download-artifact@v4
+        with:
+          name: build-job
+      - name: read the file
+        run: cat build.txt
+
+
+
+
