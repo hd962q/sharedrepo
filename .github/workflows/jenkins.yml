@@ -1,26 +1,33 @@
 name: jenkins
 on: 
  push: 
-  branches: main
+  branches: [ main }
 jobs:
  build: 
   name: building app
-  runs-on: docker
+  runs-on: ubuntu-latest
+   container:
+    image: node:20-slim 
   steps:
-     name: checkout code
+     -name: checkout code
      uses: actions/checkout@v4
-  steps:
-     name: shelling
-     run: npm install | echo 'Building the application...'
+     -name: echo run
+     run: echo " run app"
+     -name: shell command
+     run: npm install
  test: 
   name: test app
-  runs-on: docker
+  runs-on: ubuntu-latest
+  container: node:20-slim
+   image: 
+  need: build
    steps:
-     name: checkout code
+     -name: checkout code
      uses: actions/checkout@v4
-   steps:
-     name: shelling
-     run: npm test | echo 'run tests..'
+     -name: echo test 
+     run: echo " running tests"
+     -name: run tests 
+     run: npm test 
     
    
   
