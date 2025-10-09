@@ -1,35 +1,44 @@
-name: jenkins
-on: 
- push: 
-  branches: [ main ]
+name: Node.js CI from Jenkins
+
+on:
+  push:
+    branches: [ main ] # FIX: Branch name must be in a list
+
 jobs:
- build: 
-  name: building app
-  runs-on: ubuntu-latest
-  container:
-    image: node:20-slim 
-  steps:
-     -name1: checkout code
-     uses: actions/checkout@v4
-     -name2: echo runs 
-     run: echo " run app"
-     -name3: shell command
-     run: npm install
-     
- test: 
-  name: test app
-  runs-on: ubuntu-latest
-  need: build
-  container: 
-   image: node:20-slim
-  
-  steps:
-     -name4: checkout code
-     uses: actions/checkout@v4
-     -name5: echo test 
-     run: echo " running tests"
-     -name6: run tests 
-     run: npm test 
+  build:
+    name: Build
+    runs-on: ubuntu-latest      # FIX: Use a valid runner
+    container:
+      image: node:20-slim       # Use a container, just like the Jenkins agent
+
+    # FIX: A single 'steps' block for the job
+    steps:
+      # FIX: Each step must start with a hyphen '-'
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Echo build message
+        run: echo "Building the application..."
+
+      - name: Install dependencies
+        run: npm install
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: build                # This makes the 'test' job wait for the 'build' job
+    container:
+      image: node:20-slim
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Echo test message
+        run: echo "Running tests..."
+
+      - name: Run tests
+        run: npm test
     
    
   
