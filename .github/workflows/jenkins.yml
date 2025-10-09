@@ -15,13 +15,15 @@ jobs:
      run: echo " run app"
      -name3: shell command
      run: npm install
+     
  test: 
   name: test app
   runs-on: ubuntu-latest
+  need: build
   container: 
    image: node:20-slim
-  need: build
-   steps:
+  
+  steps:
      -name4: checkout code
      uses: actions/checkout@v4
      -name5: echo test 
