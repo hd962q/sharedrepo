@@ -6,20 +6,20 @@ jobs:
  build: 
   name: building app
   runs-on: ubuntu-latest
-   container:
+  container:
     image: node:20-slim 
   steps:
      -name: checkout code
      uses: actions/checkout@v4
-     -name: echo run
+     -name: echo 
      run: echo " run app"
      -name: shell command
      run: npm install
  test: 
   name: test app
   runs-on: ubuntu-latest
-  container: node:20-slim
-   image: 
+  container: 
+   image: node:20-slim
   need: build
    steps:
      -name: checkout code
