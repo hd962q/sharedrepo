@@ -9,11 +9,11 @@ jobs:
   container:
     image: node:20-slim 
   steps:
-     -name: checkout code
+     -name1: checkout code
      uses: actions/checkout@v4
-     -name: echo 
+     -name2: echo runs 
      run: echo " run app"
-     -name: shell command
+     -name3: shell command
      run: npm install
  test: 
   name: test app
@@ -22,11 +22,11 @@ jobs:
    image: node:20-slim
   need: build
    steps:
-     -name: checkout code
+     -name4: checkout code
      uses: actions/checkout@v4
-     -name: echo test 
+     -name5: echo test 
      run: echo " running tests"
-     -name: run tests 
+     -name6: run tests 
      run: npm test 
     
    
